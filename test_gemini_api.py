@@ -31,6 +31,11 @@ async def test_gemini_api():
         print(f"   Max tokens: {config.gemini.max_tokens}")
         print(f"   Temperature: {config.gemini.temperature}")
         
+        # Show system prompt if configured
+        if hasattr(config.gemini, 'system_prompt') and config.gemini.system_prompt:
+            prompt_preview = config.gemini.system_prompt[:100] + "..." if len(config.gemini.system_prompt) > 100 else config.gemini.system_prompt
+            print(f"   System prompt: {prompt_preview}")
+        
         # Check if API key is set
         if config.gemini.api_key == "your_gemini_api_key_here":
             print("❌ Error: Please set your actual Gemini API key in bot.config")
@@ -46,6 +51,10 @@ async def test_gemini_api():
             max_tokens=config.gemini.max_tokens,
             temperature=config.gemini.temperature
         )
+        
+        # Set custom system prompt if provided in config
+        if hasattr(config.gemini, 'system_prompt') and config.gemini.system_prompt:
+            gemini.set_system_prompt(config.gemini.system_prompt)
         
         # Test with a simple message
         test_message = "Hello! This is a test message. Please respond with 'API test successful'."

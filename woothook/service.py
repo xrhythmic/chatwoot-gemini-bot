@@ -40,6 +40,10 @@ class WootHook:
             max_tokens=self.config.gemini.max_tokens,
             temperature=self.config.gemini.temperature
         )
+        
+        # Set custom system prompt if provided in config
+        if hasattr(self.config.gemini, 'system_prompt') and self.config.gemini.system_prompt:
+            self.gemini.set_system_prompt(self.config.gemini.system_prompt)
 
         async def message_handler(request: Dict):
             await self.process_message(request)

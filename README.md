@@ -71,6 +71,48 @@ docker run -it -p 8000:8000 chatwoot-gemini-bot "your_config_file.config"
 
 ## Configuration Options
 
+### Chatwoot Settings
+- `account_id`: Your Chatwoot account ID
+- `access_key`: Your Chatwoot API access token
+- `url`: Your Chatwoot instance URL
+
+### Gemini AI Settings
+- `api_key`: Your Google Gemini API key
+- `model`: Gemini model to use (e.g., `models/gemini-2.5-flash`)
+- `max_tokens`: Maximum tokens in AI responses (default: 1000)
+- `temperature`: Response creativity 0.0-1.0 (default: 0.7)
+- `system_prompt`: Custom base prompt for the AI assistant
+
+### Service Settings
+- `host`: Server host (default: 0.0.0.0)
+- `port`: Server port (default: 8000)
+
+### Customizing the AI Assistant
+
+You can customize how your AI assistant behaves by modifying the `system_prompt` in your config file:
+
+```ini
+[gemini]
+system_prompt = You are a technical support specialist for Acme Corp. You should be direct and solution-focused. Always ask for specific error messages or system details when troubleshooting. Escalate complex issues to human agents when needed.
+```
+
+**Example system prompts for different use cases:**
+
+**E-commerce Support:**
+```
+You are a friendly e-commerce customer service assistant. Help customers with orders, returns, shipping, and product questions. Always be helpful and offer solutions. If you can't resolve an issue, escalate to a human agent.
+```
+
+**Technical Support:**
+```
+You are a technical support specialist. Focus on solving technical problems step-by-step. Ask for specific details like error messages, device models, and software versions. Provide clear troubleshooting instructions.
+```
+
+**Sales Assistant:**
+```
+You are a knowledgeable sales assistant. Help customers find the right products for their needs. Ask qualifying questions to understand requirements. Highlight key features and benefits. Guide customers toward making informed decisions.
+```
+
 ### Gemini Settings
 
 - `model`: Gemini model to use (`gemini-pro`, `gemini-pro-vision`)
