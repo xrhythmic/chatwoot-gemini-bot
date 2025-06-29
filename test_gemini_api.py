@@ -31,10 +31,18 @@ async def test_gemini_api():
         print(f"   Max tokens: {config.gemini.max_tokens}")
         print(f"   Temperature: {config.gemini.temperature}")
         
-        # Show system prompt if configured
-        if hasattr(config.gemini, 'system_prompt') and config.gemini.system_prompt:
+        # Show system prompt configuration
+        prompt_info = "Default prompt"
+        if hasattr(config.gemini, 'system_prompt_file') and config.gemini.system_prompt_file:
+            prompt_info = f"File: {config.gemini.system_prompt_file}"
+            # Check if file exists
+            if not Path(config.gemini.system_prompt_file).exists():
+                prompt_info += " (FILE NOT FOUND)"
+        elif hasattr(config.gemini, 'system_prompt') and config.gemini.system_prompt:
             prompt_preview = config.gemini.system_prompt[:100] + "..." if len(config.gemini.system_prompt) > 100 else config.gemini.system_prompt
-            print(f"   System prompt: {prompt_preview}")
+            prompt_info = f"Inline: {prompt_preview}"
+        
+        print(f"   System prompt: {prompt_info}")
         
         # Check if API key is set
         if config.gemini.api_key == "your_gemini_api_key_here":
@@ -52,8 +60,10 @@ async def test_gemini_api():
             temperature=config.gemini.temperature
         )
         
-        # Set custom system prompt if provided in config
-        if hasattr(config.gemini, 'system_prompt') and config.gemini.system_prompt:
+        # Load custom system prompt from file or inline config
+        if hasattr(config.gemini, 'system_prompt_file') and config.gemini.system_prompt_file:
+            gemini.load_system_prompt_from_file(config.gemini.system_prompt_file)
+        elif hasattr(config.gemini, 'system_prompt') and config.gemini.system_prompt:
             gemini.set_system_prompt(config.gemini.system_prompt)
         
         # Test with a simple message

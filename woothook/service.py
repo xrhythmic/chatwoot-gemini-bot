@@ -41,8 +41,10 @@ class WootHook:
             temperature=self.config.gemini.temperature
         )
         
-        # Set custom system prompt if provided in config
-        if hasattr(self.config.gemini, 'system_prompt') and self.config.gemini.system_prompt:
+        # Load custom system prompt from file or inline config
+        if hasattr(self.config.gemini, 'system_prompt_file') and self.config.gemini.system_prompt_file:
+            self.gemini.load_system_prompt_from_file(self.config.gemini.system_prompt_file)
+        elif hasattr(self.config.gemini, 'system_prompt') and self.config.gemini.system_prompt:
             self.gemini.set_system_prompt(self.config.gemini.system_prompt)
 
         async def message_handler(request: Dict):

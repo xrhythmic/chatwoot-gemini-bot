@@ -5,6 +5,10 @@ __pycache__/
 *.config
 !example.config
 
+# Custom system prompts (user-specific)
+system_prompt.md
+system_prompt.txt
+
 # C extensions
 *.so
 

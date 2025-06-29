@@ -3,6 +3,7 @@
 import google.generativeai as genai
 from typing import Optional, Dict, Any
 import logging
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +43,25 @@ class GeminiAI:
     def set_system_prompt(self, prompt: str):
         """Set a custom system prompt for the AI."""
         self.system_prompt = prompt
+    
+    def load_system_prompt_from_file(self, file_path: str):
+        """Load system prompt from a text or markdown file."""
+        try:
+            prompt_file = Path(file_path)
+            if not prompt_file.exists():
+                logger.warning(f"System prompt file not found: {file_path}. Using default prompt.")
+                return
+            
+            with open(prompt_file, 'r', encoding='utf-8') as f:
+                content = f.read().strip()
+                if content:
+                    self.system_prompt = content
+                    logger.info(f"Loaded system prompt from: {file_path}")
+                else:
+                    logger.warning(f"System prompt file is empty: {file_path}. Using default prompt.")
+        except Exception as e:
+            logger.error(f"Error loading system prompt from file {file_path}: {e}")
+            logger.info("Using default system prompt.")
     
     async def generate_response(self, message: str, context: Optional[Dict[str, Any]] = None) -> str:
         """

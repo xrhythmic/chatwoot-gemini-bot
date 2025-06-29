@@ -81,7 +81,8 @@ docker run -it -p 8000:8000 chatwoot-gemini-bot "your_config_file.config"
 - `model`: Gemini model to use (e.g., `models/gemini-2.5-flash`)
 - `max_tokens`: Maximum tokens in AI responses (default: 1000)
 - `temperature`: Response creativity 0.0-1.0 (default: 0.7)
-- `system_prompt`: Custom base prompt for the AI assistant
+- `system_prompt_file`: Path to a text/markdown file containing the AI system prompt (recommended)
+- `system_prompt`: Inline system prompt (alternative to file-based approach)
 
 ### Service Settings
 - `host`: Server host (default: 0.0.0.0)
@@ -89,12 +90,53 @@ docker run -it -p 8000:8000 chatwoot-gemini-bot "your_config_file.config"
 
 ### Customizing the AI Assistant
 
-You can customize how your AI assistant behaves by modifying the `system_prompt` in your config file:
+You can customize how your AI assistant behaves by creating a system prompt file (recommended) or using an inline prompt in your config file.
+
+#### Method 1: System Prompt File (Recommended)
+
+Create a `system_prompt.md` (or `.txt`) file with detailed instructions:
 
 ```ini
 [gemini]
-system_prompt = You are a technical support specialist for Acme Corp. You should be direct and solution-focused. Always ask for specific error messages or system details when troubleshooting. Escalate complex issues to human agents when needed.
+system_prompt_file = system_prompt.md
 ```
+
+Example `system_prompt.md`:
+```markdown
+# Customer Service AI Assistant
+
+You are a helpful customer service assistant for Acme Corp.
+
+## Your Role
+- Provide excellent customer support
+- Be professional and empathetic
+- Focus on solving problems quickly
+
+## Guidelines
+- Always acknowledge the customer's concern
+- Ask clarifying questions when needed
+- Provide clear, step-by-step solutions
+- Escalate complex issues to human agents
+
+## Tone
+- Friendly but professional
+- Patient and understanding
+- Confident in your abilities
+```
+
+#### Method 2: Inline Prompt (For shorter prompts)
+
+```ini
+[gemini]
+system_prompt = You are a technical support specialist. Be direct and solution-focused.
+```
+
+**Benefits of file-based prompts:**
+- ✅ Support for longer, more detailed instructions
+- ✅ Easy editing with proper formatting
+- ✅ Markdown support for better organization
+- ✅ Version control friendly
+- ✅ Reusable across different bots
 
 **Example system prompts for different use cases:**
 
