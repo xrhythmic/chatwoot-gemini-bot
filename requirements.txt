@@ -1,0 +1,7 @@
+requests>=2.27.1
+git+https://github.com/dearkafka/woot#egg=woot
+typer
+fastapi
+uvicorn
+google-generativeai>=0.8.0
+python-dotenv

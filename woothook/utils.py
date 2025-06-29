@@ -29,5 +29,10 @@ def load_config(config_file: str) -> dotdict:
             if section == "service":
                 if key == "port":
                     dot_config[section][key] = int(value)
+            if section == "gemini":
+                if key == "max_tokens":
+                    dot_config[section][key] = int(value)
+                if key == "temperature":
+                    dot_config[section][key] = float(value)
 
     return dot_config

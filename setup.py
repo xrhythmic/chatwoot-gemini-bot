@@ -7,17 +7,17 @@ def long_description():
 
 
 setup(
-    name="woothook",
-    version="0.0.1",
-    author="Aleksei Ushakov",
-    author_email="isfluid@proton.me",
-    description="Chatwoot webhook server template using woot",
+    name="chatwoot-gemini-bot",
+    version="1.0.0",
+    author="Jordan Price",
+    author_email="jordan@dragonbyte.solutions",
+    description="Chatwoot agent bot powered by Google Gemini AI",
     long_description=long_description(),
     long_description_content_type="text/markdown",
     packages=["woothook"],
-    license="Cooperative Non-Violent Public License v7 or later (CNPLv7+)",
+    license="MIT",
     project_urls={
-        "Bug Tracker": "https://github.com/dearkafka/woothook/issues",
+        "Bug Tracker": "https://github.com/xrhythmic/chatwoot-gemini-bot/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3.6",
@@ -35,6 +35,8 @@ setup(
         "typer",
         "fastapi",
         "uvicorn",
+        "google-generativeai>=0.8.0",
+        "python-dotenv",
     ],
     entry_points={  # Optional
         "console_scripts": [
