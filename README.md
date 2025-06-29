@@ -26,7 +26,7 @@ pip install git+https://github.com/your-username/chatwoot-agent-bot
    - Go to Chatwoot → Settings → Integrations → Webhooks
    - Add a new webhook pointing to your server URL
    - Subscribe to "Message Created" events
-3. Copy `example.config` and fill in your details:
+3. Copy `example.config` to `bot.config` and fill in your details:
 
 ```ini
 [chatwoot]
