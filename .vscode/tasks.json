@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start Chatwoot Gemini Bot",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"start_bot.py"
+			],
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": [],
+			"options": {
+				"env": {
+					"PYTHONPATH": "${workspaceFolder}"
+				}
+			}
+		}
+	]
+}
